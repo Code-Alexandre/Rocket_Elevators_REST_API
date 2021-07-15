@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/d0a1cde6-be81-44fe-b939-14a236d00ae4/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/Code-Alexandre",
+    "appService.deploySubpath": "publish"
+}

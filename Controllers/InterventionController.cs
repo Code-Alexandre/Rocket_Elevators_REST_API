@@ -27,12 +27,7 @@ namespace FactIntervention.Controllers
             var offline = await _context.interventions.Where(i => i.status.Equals("Pending") || i.start_date.Equals(null)).ToListAsync();
             return offline;
         }
-        //         public async Task<ActionResult<IEnumerable<Elevator>>> GetElevators()
-        // {
-        //    var offline = await _context.elevators.Where(e => e.Status.Equals("Intervention") || e.Status.Equals("Inactive")).ToListAsync();
-        //     return offline;
-        // }
-
+        
         // GET: api/Intervention/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Intervention>> GetIntervention(long id)
