@@ -47,7 +47,7 @@ namespace FactIntervention.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmployee(long id, Employee employee)
         {
-            if (id != employee.Id)
+            if (id != employee.id)
             {
                 return BadRequest();
             }
@@ -82,7 +82,7 @@ namespace FactIntervention.Controllers
             _context.employees.Add(employee);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEmployee", new { id = employee.Id }, employee);
+            return CreatedAtAction("GetEmployee", new { id = employee.id }, employee);
         }
 
         // DELETE: api/Employees/5
@@ -103,7 +103,7 @@ namespace FactIntervention.Controllers
 
         private bool EmployeeExists(long id)
         {
-            return _context.employees.Any(e => e.Id == id);
+            return _context.employees.Any(e => e.id == id);
         }
     }
 }

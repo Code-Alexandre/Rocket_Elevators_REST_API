@@ -60,7 +60,7 @@ namespace FactIntervention.Controllers
             this._context.elevators.Update(elevator);
             await this._context.SaveChangesAsync();
 
-            return Content("The status of the elevator ID: " + elevator.Id +
+            return Content("The status of the elevator ID: " + elevator.id +
             " has been changed to: " + elevator.Status);
         }
 
@@ -79,7 +79,7 @@ namespace FactIntervention.Controllers
             this._context.elevators.Update(elevator);
             await this._context.SaveChangesAsync();
 
-            return Content("The status of the elevator ID: " + elevator.Id +
+            return Content("The status of the elevator ID: " + elevator.id +
             " has been changed to: " + elevator.Status);
         }
 
@@ -98,7 +98,7 @@ namespace FactIntervention.Controllers
             this._context.elevators.Update(elevator);
             await this._context.SaveChangesAsync();
 
-            return Content("The status of the elevator ID: " + elevator.Id +
+            return Content("The status of the elevator ID: " + elevator.id +
             " has been changed to: " + elevator.Status);
         }
 
@@ -132,7 +132,7 @@ namespace FactIntervention.Controllers
 
         private bool ElevatorExists(long id)
         {
-            return _context.elevators.Any(e => e.Id == id);
+            return _context.elevators.Any(e => e.id == id);
         }
     }
 }

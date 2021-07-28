@@ -28,24 +28,22 @@ namespace FactIntervention.Controllers
         }
 
         // GET: api/Customers/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Customer>> GetCustomer(long id)
-        {
-            var customer = await _context.customers.FindAsync(id);
+        // [HttpGet("{id}")]
+        // public async Task<ActionResult<Customer>> GetCustomer(long id)
+        // {
+        //     var customer = await _context.customers.FindAsync(id);
 
-            if (customer == null)
-            {
-                return NotFound();
-            }
+        //     if (customer == null)
+        //     {
+        //         return NotFound();
+        //     }
 
-            return customer;
-        }
+        //     return customer;
+        // // }
         [HttpGet("{email}")]
-        public async Task<ActionResult<Customer>> GetCustomer(string email)
+        public async Task<ActionResult<IEnumerable<Customer>>> EmailCustomer(string email)
         {
-            var customer = await _context.customers.Include("Buildings.Batteries.Columns.Elevators")
-                                                .Where(c => c.email_of_the_company_contact == email)
-                                                .FirstOrDefaultAsync();        
+            var customer = await _context.customers.Where(c => c.email_of_the_company_contact == email).ToListAsync(); 
 
             if (customer == null)
             {
@@ -54,13 +52,32 @@ namespace FactIntervention.Controllers
 
             return customer;
         }
+
+        // [HttpGet("{email}")]
+        // public async Task<ActionResult<Customer>> GetCustomer(string email)
+        // {
+        //     var customer = await _context.customers.Include("Buildings.Batteries.Columns.Elevators")
+        //                                         .Where(c => c.email_of_the_company_contact == email)
+        //                                         .FirstOrDefaultAsync();  
+
+        //     // customer = await _context.customers.Include("Buildings.Addresses")
+        //     //                                     .Where(c => c.cpy_contact_email == email)
+        //     //                                     .FirstOrDefaultAsync();          
+
+        //     if (customer == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     return customer;
+        // }
         // Get email for customer 
 
         [HttpGet("verify/{email}")]
         public async Task<ActionResult> VerifyEmail(string email)
         {
             var customer = await _context.customers.Include("Buildings.Batteries.Columns.Elevators")
-                                                .Where(c => c.email_of_the_company_contact == email)
+                                                .Where(e => e.email_of_the_company_contact == email)
                                                 .FirstOrDefaultAsync();            
 
             if (customer == null)
@@ -74,7 +91,7 @@ namespace FactIntervention.Controllers
         public async Task<ActionResult<Customer>> PutCustomer(Customer customer)
         {
             var customerToUpdate = await _context.customers
-                                                .Where(c => c.email_of_the_company_contact == customer.email_of_the_company_contact)
+                                                .Where(e => e.email_of_the_company_contact == customer.email_of_the_company_contact)
                                                 .FirstOrDefaultAsync(); 
 
             if (customerToUpdate == null)
@@ -102,7 +119,7 @@ namespace FactIntervention.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCustomer(long id, Customer customer)
         {
-            if (id != customer.Id)
+            if (id != customer.id)
             {
                 return BadRequest();
             }
@@ -137,7 +154,7 @@ namespace FactIntervention.Controllers
             _context.customers.Add(customer);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
+            return CreatedAtAction("GetCustomer", new { id = customer.id }, customer);
         }
 
         // DELETE: api/Customers/5
@@ -158,7 +175,7 @@ namespace FactIntervention.Controllers
 
         private bool CustomerExists(long id)
         {
-            return _context.customers.Any(e => e.Id == id);
+            return _context.customers.Any(e => e.id == id);
         }
     }
 }

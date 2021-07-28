@@ -61,7 +61,7 @@ namespace FactIntervention.Controllers
             this._context.interventions.Update(intervention);
             await this._context.SaveChangesAsync();
 
-            return Content("The status of the intervention ID: " + intervention.Id +
+            return Content("The status of the intervention ID: " + intervention.id +
             " has been changed to: " + intervention.status + " and the start date as been updated to: " + intervention.start_date);
         }
 
@@ -81,14 +81,14 @@ namespace FactIntervention.Controllers
             this._context.interventions.Update(intervention);
             await this._context.SaveChangesAsync();
 
-            return Content("The status of the intervention ID: " + intervention.Id +
+            return Content("The status of the intervention ID: " + intervention.id +
             " has been changed to: " + intervention.status + " and the end date as been updated to: " + intervention.end_date);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutIntervention(long id, Intervention intervention)
         {
-            if (id != intervention.Id)
+            if (id != intervention.id)
             {
                 return BadRequest();
             }
@@ -123,7 +123,7 @@ namespace FactIntervention.Controllers
             _context.interventions.Add(intervention);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetIntervention", new { id = intervention.Id }, intervention);
+            return CreatedAtAction("GetIntervention", new { id = intervention.id }, intervention);
         }
         
 
@@ -145,7 +145,7 @@ namespace FactIntervention.Controllers
 
         private bool InterventionExists(long id)
         {
-            return _context.interventions.Any(e => e.Id == id);
+            return _context.interventions.Any(e => e.id == id);
         }
     }
 }

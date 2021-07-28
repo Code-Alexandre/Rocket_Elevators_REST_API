@@ -22,18 +22,18 @@ namespace FactIntervention.Controllers
         }
 
         // GET: api/Buildings
-        [HttpGet("intervention")]
-        public IEnumerable<Building> GetBuildingsIntervention() 
-        {
-            IQueryable<Building> Building = from build in _context.buildings
-                join bat in _context.batteries on build.Id equals bat.Building_Id
-                join col in _context.columns on bat.Id equals col.battery_Id
-                join ele in _context.elevators on col.Id equals ele.column_Id
-                where bat.Status == "Intervention" || col.Status == "Intervention" || ele.Status == "Intervention"
-                select build;
-            var result = Building.DistinctBy(i => i.Id);
-            return result;
-        }
+        // [HttpGet("intervention")]
+        // public IEnumerable<Building> GetBuildingsIntervention() 
+        // {
+        //     IQueryable<Building> Building = from build in _context.buildings
+        //         join bat in _context.batteries on build.Id equals bat.Building_Id
+        //         join col in _context.columns on bat.Id equals col.battery_Id
+        //         join ele in _context.elevators on col.Id equals ele.column_Id
+        //         where bat.Status == "Intervention" || col.Status == "Intervention" || ele.Status == "Intervention"
+        //         select build;
+        //     var result = Building.DistinctBy(i => i.Id);
+        //     return result;
+        // }
 
         // // GET: api/Buildings/5
         // [HttpGet("{id}")]
@@ -111,7 +111,7 @@ namespace FactIntervention.Controllers
 
         private bool BuildingExists(long id)
         {
-            return _context.buildings.Any(e => e.Id == id);
+            return _context.buildings.Any(e => e.id == id);
         }
     }
 }

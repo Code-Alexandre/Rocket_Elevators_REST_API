@@ -4,11 +4,19 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
-public class Battery
+
+namespace FactInterventionApi.Models
 {
-    [Key]
-    public long Id { get; set; }
-    public string Status { get; set; }
-    public long Building_Id { get; set; }
-   
-}
+    public partial class Battery
+    {
+        [Key]
+        public int id { get; set; }
+        public string Status { get; set; }
+        // public long Building_Id { get; set; }
+
+        public virtual int building_id { get; set;}
+        public  Building Building { get; set;}
+
+        public virtual ICollection<Column> Columns { get; set;}
+    }
+}        

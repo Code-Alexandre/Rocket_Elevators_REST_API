@@ -59,7 +59,7 @@ namespace FactIntervention.Controllers
             this._context.batteries.Update(battery);
             await this._context.SaveChangesAsync();
 
-            return Content("The status of the Battery ID: " + battery.Id +
+            return Content("The status of the Battery ID: " + battery.id +
             " has been changed to: " + battery.Status);
         }
 
@@ -78,7 +78,7 @@ namespace FactIntervention.Controllers
             this._context.batteries.Update(battery);
             await this._context.SaveChangesAsync();
 
-            return Content("The status of the Battery ID: " + battery.Id +
+            return Content("The status of the Battery ID: " + battery.id +
             " has been changed to: " + battery.Status);
         }
 
@@ -97,7 +97,7 @@ namespace FactIntervention.Controllers
             this._context.batteries.Update(battery);
             await this._context.SaveChangesAsync();
 
-            return Content("The status of the Battery ID: " + battery.Id +
+            return Content("The status of the Battery ID: " + battery.id +
             " has been changed to: " + battery.Status);
         }
         // POST: api/Batteries
@@ -131,7 +131,7 @@ namespace FactIntervention.Controllers
 
         private bool BatteryExists(long id)
         {
-            return _context.batteries.Any(e => e.Id == id);
+            return _context.batteries.Any(e => e.id == id);
         }
     }
 }

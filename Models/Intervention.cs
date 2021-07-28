@@ -7,7 +7,7 @@ using System.Web;
 public class Intervention
 {
     [Key]
-    public long Id { get; set; }
+    public long id { get; set; }
     public long author_id { get; set; }
     public long customer_id { get; set; }
     public long building_id { get; set; }

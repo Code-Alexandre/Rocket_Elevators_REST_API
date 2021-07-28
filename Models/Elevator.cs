@@ -4,10 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
-public class Elevator
+namespace FactInterventionApi.Models
 {
-    [Key]
-    public long Id { get; set; }
-    public string Status { get; set; }
-    public long column_Id { get; set; }
-}
+    public class Elevator
+    {
+        [Key]
+        public int id { get; set; }
+        public string Status { get; set; }
+        // public long column_Id { get; set; }
+        public  Column Column { get; }
+        public virtual int column_id { get; set; }
+    }
+}    
