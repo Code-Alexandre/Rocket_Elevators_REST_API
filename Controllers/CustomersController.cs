@@ -58,6 +58,8 @@ namespace FactIntervention.Controllers
 
             return customer;
         }
+        // Get email for customer 
+
                 [HttpGet("verify/{email}")]
         public async Task<ActionResult> VerifyEmail(string email)
         {
