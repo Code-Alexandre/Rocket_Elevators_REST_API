@@ -40,16 +40,12 @@ namespace FactIntervention.Controllers
 
             return customer;
         }
-                [HttpGet("{email}")]
+        [HttpGet("{email}")]
         public async Task<ActionResult<Customer>> GetCustomer(string email)
         {
             var customer = await _context.customers.Include("Buildings.Batteries.Columns.Elevators")
                                                 .Where(c => c.email_of_the_company_contact == email)
-                                                .FirstOrDefaultAsync();  
-
-            // customer = await _context.customers.Include("Buildings.Addresses")
-            //                                     .Where(c => c.cpy_contact_email == email)
-            //                                     .FirstOrDefaultAsync();          
+                                                .FirstOrDefaultAsync();        
 
             if (customer == null)
             {
@@ -60,7 +56,7 @@ namespace FactIntervention.Controllers
         }
         // Get email for customer 
 
-                [HttpGet("verify/{email}")]
+        [HttpGet("verify/{email}")]
         public async Task<ActionResult> VerifyEmail(string email)
         {
             var customer = await _context.customers.Include("Buildings.Batteries.Columns.Elevators")
