@@ -14,7 +14,7 @@ namespace FactInterventionApi.Models
         public string Status { get; set; }
         // public long battery_Id { get; set; }
         public virtual long battery_id { get; set; }
-        public  Battery Battery { get; set;}
-        public List<Elevator> elevators { get; set; }
+        // public  Battery Battery { get; set;}
+        // public List<Elevator> elevators { get; set; }
     }
 }    

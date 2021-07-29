@@ -12,11 +12,11 @@ namespace FactInterventionApi.Models
         [Key]
         public long Id { get; set; }
         public string Status { get; set; }
-        // public long Building_Id { get; set; }
+        public long Building_Id { get; set; }
 
-        public virtual long building_id { get; set;}
-        public  Building Building { get; set;}
+        // public virtual long building_id { get; set;}
+        // public  Building Building { get; set;}
 
-        public List<Column> columns { get; set; }
+        // public List<Column> columns { get; set; }
     }
 }        

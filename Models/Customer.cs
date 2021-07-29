@@ -20,7 +20,7 @@ namespace FactInterventionApi.Models
         public string company_description { get; set; }
         public long user_id { get; set; }
         public long company_headquarters_address_id { get; set; }
-        public List<Building> buildings { get; set; }
+        // public Building Buildings { get; set; }
         
     }
 }    
