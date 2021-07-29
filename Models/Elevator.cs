@@ -12,7 +12,8 @@ namespace FactInterventionApi.Models
         public long Id { get; set; }
         public string Status { get; set; }
         // public long column_Id { get; set; }
-        public  Column Column { get; }
         public virtual long column_id { get; set; }
+        public Column columns { get; set; }
+        public List<Elevator> elevators { get; set; }
     }
 }    

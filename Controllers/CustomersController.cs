@@ -40,29 +40,10 @@ namespace FactIntervention.Controllers
 
         //     return customer;
         // // }
-        [HttpGet("{email}")]
-        public async Task<ActionResult<IEnumerable<Customer>>> EmailCustomer(string email)
-        {
-            var customer = await _context.customers.Where(c => c.email_of_the_company_contact == email).ToListAsync(); 
-
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            return customer;
-        }
-
         // [HttpGet("{email}")]
-        // public async Task<ActionResult<Customer>> GetCustomer(string email)
+        // public async Task<ActionResult<IEnumerable<Customer>>> EmailCustomer(string email)
         // {
-        //     var customer = await _context.customers.Include("Buildings.Batteries.Columns.Elevators")
-        //                                         .Where(c => c.email_of_the_company_contact == email)
-        //                                         .FirstOrDefaultAsync();  
-
-        //     // customer = await _context.customers.Include("Buildings.Addresses")
-        //     //                                     .Where(c => c.cpy_contact_email == email)
-        //     //                                     .FirstOrDefaultAsync();          
+        //     var customer = await _context.customers.Where(c => c.email_of_the_company_contact == email).ToListAsync(); 
 
         //     if (customer == null)
         //     {
@@ -71,6 +52,25 @@ namespace FactIntervention.Controllers
 
         //     return customer;
         // }
+
+        [HttpGet("{email}")]
+        public async Task<ActionResult<Customer>> GetCustomer(string email)
+        {
+            var customer = await _context.customers.Include("Buildings.Batteries.Columns.Elevators")
+                                                .Where(c => c.email_of_the_company_contact == email)
+                                                .FirstOrDefaultAsync();  
+
+            // customer = await _context.customers.Include("Buildings.Addresses")
+            //                                     .Where(c => c.cpy_contact_email == email)
+            //                                     .FirstOrDefaultAsync();          
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return customer;
+        }
         // Get email for customer 
 
         [HttpGet("verify/{email}")]

@@ -12,8 +12,9 @@ namespace FactInterventionApi.Models
         [Key]
         public long Id { get; set; }
         public long customer_Id {get; set;}
-        public virtual ICollection<Battery> Batteries { get; set;}
+        public List<Battery> batteries { get; set; }
         public  Customer Customer { get; set; }
+        public List<Customer> customers { get; set; }
 
     }
 }

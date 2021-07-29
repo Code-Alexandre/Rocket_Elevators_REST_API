@@ -15,6 +15,6 @@ namespace FactInterventionApi.Models
         // public long battery_Id { get; set; }
         public virtual long battery_id { get; set; }
         public  Battery Battery { get; set;}
-        public virtual ICollection<Elevator> Elevators { get; }
+        public List<Elevator> elevators { get; set; }
     }
 }    
