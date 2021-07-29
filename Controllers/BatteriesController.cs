@@ -28,18 +28,30 @@ namespace FactIntervention.Controllers
         // }
 
         // GET: api/Batteries/(id)
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Battery>> GetBattery(long id)
+        [HttpGet("{BuildingID}")]
+        public async Task<ActionResult<IEnumerable<Battery>>> Battery(long BuildingID)
         {
-            var battery = await _context.batteries.FindAsync(id);
+            var customer = await _context.batteries.Where(b => b.building_id == BuildingID).ToListAsync(); 
 
-            if (battery == null)
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return Content("The status of this Battery is currently:" + battery.status);
+            return customer;
         }
+        // [HttpGet("{id}")]
+        // public async Task<ActionResult<Battery>> GetBattery(long id)
+        // {
+        //     var battery = await _context.batteries.FindAsync(id);
+
+        //     if (battery == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     return Content("The status of this Battery is currently:" + battery.status);
+        // }
 
         // PUT: api/Batteries/5    //Put Request must be the full body, not just the update
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

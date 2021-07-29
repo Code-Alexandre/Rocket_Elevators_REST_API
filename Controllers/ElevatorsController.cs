@@ -29,17 +29,29 @@ namespace FactIntervention.Controllers
         }
 
         // GET: api/Elevators/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Elevator>> GetElevator(long id)
-        {
-            var elevator = await _context.elevators.FindAsync(id);
+        // [HttpGet("{id}")]
+        // public async Task<ActionResult<Elevator>> GetElevator(long id)
+        // {
+        //     var elevator = await _context.elevators.FindAsync(id);
 
-            if (elevator == null)
+        //     if (elevator == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     return Content("The status of this Elevator is currently:" + elevator.Status);
+        // }
+        [HttpGet("{ColumnID}")]
+        public async Task<ActionResult<IEnumerable<Elevator>>> Column(long ColumnID)
+        {
+            var customer = await _context.elevators.Where(b => b.column_id == ColumnID).ToListAsync(); 
+
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return Content("The status of this Elevator is currently:" + elevator.Status);
+            return customer;
         }
 
         // PUT: api/Elevators/5/status

@@ -26,16 +26,29 @@ namespace FactIntervention.Controllers
         // public IEnumerable<Building> GetBuildingsIntervention() 
         // {
         //     IQueryable<Building> Building = from build in _context.buildings
-        //         join bat in _context.batteries on build.Id equals bat.Building_Id
-        //         join col in _context.columns on bat.Id equals col.battery_Id
-        //         join ele in _context.elevators on col.Id equals ele.column_Id
-        //         where bat.Status == "Intervention" || col.Status == "Intervention" || ele.Status == "Intervention"
+        //         join bat in _context.batteries on build.Id equals bat.building_id
+        //         join col in _context.columns on bat.Id equals col.battery_id
+        //         join ele in _context.elevators on col.Id equals ele.column_id
+        //         where bat.status == "Intervention" || col.Status == "Intervention" || ele.Status == "Intervention"
         //         select build;
         //     var result = Building.DistinctBy(i => i.Id);
         //     return result;
         // }
 
-        // // GET: api/Buildings/5
+        [HttpGet("{CustomerID}")]
+        public async Task<ActionResult<IEnumerable<Building>>> Building(long customerID)
+        {
+            var customer = await _context.buildings.Where(b => b.customer_Id == customerID).ToListAsync(); 
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return customer;
+        }
+
+        // GET: api/Buildings/5
         // [HttpGet("{id}")]
         // public async Task<ActionResult<Building>> GetBuilding(long id)
         // {
@@ -49,65 +62,65 @@ namespace FactIntervention.Controllers
         //     return building;
         // }
 
-        // // PUT: api/Buildings/5
-        // // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        // [HttpPut("{id}")]
-        // public async Task<IActionResult> PutBuilding(long id, Building building)
-        // {
-        //     if (id != building.Id)
-        //     {
-        //         return BadRequest();
-        //     }
+        // PUT: api/Buildings/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutBuilding(long id, Building building)
+        {
+            if (id != building.Id)
+            {
+                return BadRequest();
+            }
 
-        //     _context.Entry(building).State = EntityState.Modified;
+            _context.Entry(building).State = EntityState.Modified;
 
-        //     try
-        //     {
-        //         await _context.SaveChangesAsync();
-        //     }
-        //     catch (DbUpdateConcurrencyException)
-        //     {
-        //         if (!BuildingExists(id))
-        //         {
-        //             return NotFound();
-        //         }
-        //         else
-        //         {
-        //             throw;
-        //         }
-        //     }
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!BuildingExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //     return NoContent();
-        // }
+            return NoContent();
+        }
 
-        // // POST: api/Buildings
-        // // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        // [HttpPost]
-        // public async Task<ActionResult<Building>> PostBuilding(Building building)
-        // {
-        //     _context.buildings.Add(building);
-        //     await _context.SaveChangesAsync();
+        // POST: api/Buildings
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPost]
+        public async Task<ActionResult<Building>> PostBuilding(Building building)
+        {
+            _context.buildings.Add(building);
+            await _context.SaveChangesAsync();
 
-        //     return CreatedAtAction("GetBuilding", new { id = building.Id }, building);
-        // }
+            return CreatedAtAction("GetBuilding", new { id = building.Id }, building);
+        }
 
-        // // DELETE: api/Buildings/5
-        // [HttpDelete("{id}")]
-        // public async Task<ActionResult<Building>> DeleteBuilding(long id)
-        // {
-        //     var building = await _context.buildings.FindAsync(id);
-        //     if (building == null)
-        //     {
-        //         return NotFound();
-        //     }
+        // DELETE: api/Buildings/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Building>> DeleteBuilding(long id)
+        {
+            var building = await _context.buildings.FindAsync(id);
+            if (building == null)
+            {
+                return NotFound();
+            }
 
-        //     _context.buildings.Remove(building);
-        //     await _context.SaveChangesAsync();
+            _context.buildings.Remove(building);
+            await _context.SaveChangesAsync();
 
-        //     return building;
-        // }
+            return building;
+        }
 
         private bool BuildingExists(long id)
         {
