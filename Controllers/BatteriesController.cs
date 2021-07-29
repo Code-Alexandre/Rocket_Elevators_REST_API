@@ -38,7 +38,7 @@ namespace FactIntervention.Controllers
                 return NotFound();
             }
 
-            return Content("The status of this Battery is currently:" + battery.Status);
+            return Content("The status of this Battery is currently:" + battery.status);
         }
 
         // PUT: api/Batteries/5    //Put Request must be the full body, not just the update
@@ -54,13 +54,13 @@ namespace FactIntervention.Controllers
             }
             else
             {
-                battery.Status = "Inactive";
+                battery.status = "Inactive";
             }
             this._context.batteries.Update(battery);
             await this._context.SaveChangesAsync();
 
             return Content("The status of the Battery ID: " + battery.Id +
-            " has been changed to: " + battery.Status);
+            " has been changed to: " + battery.status);
         }
 
         [HttpPut("{id}/active")]
@@ -73,13 +73,13 @@ namespace FactIntervention.Controllers
             }
             else
             {
-                battery.Status = "Active";
+                battery.status = "Active";
             }
             this._context.batteries.Update(battery);
             await this._context.SaveChangesAsync();
 
             return Content("The status of the Battery ID: " + battery.Id +
-            " has been changed to: " + battery.Status);
+            " has been changed to: " + battery.status);
         }
 
         [HttpPut("{id}/intervention")]
@@ -92,13 +92,13 @@ namespace FactIntervention.Controllers
             }
             else
             {
-                battery.Status = "Intervention";
+                battery.status = "Intervention";
             }
             this._context.batteries.Update(battery);
             await this._context.SaveChangesAsync();
 
             return Content("The status of the Battery ID: " + battery.Id +
-            " has been changed to: " + battery.Status);
+            " has been changed to: " + battery.status);
         }
         // POST: api/Batteries
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
