@@ -119,7 +119,7 @@ namespace FactIntervention.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCustomer(long id, Customer customer)
         {
-            if (id != customer.id)
+            if (id != customer.Id)
             {
                 return BadRequest();
             }
@@ -154,7 +154,7 @@ namespace FactIntervention.Controllers
             _context.customers.Add(customer);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCustomer", new { id = customer.id }, customer);
+            return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
         }
 
         // DELETE: api/Customers/5
@@ -175,7 +175,7 @@ namespace FactIntervention.Controllers
 
         private bool CustomerExists(long id)
         {
-            return _context.customers.Any(e => e.id == id);
+            return _context.customers.Any(e => e.Id == id);
         }
     }
 }

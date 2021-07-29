@@ -59,7 +59,7 @@ namespace FactIntervention.Controllers
             this._context.columns.Update(column);
             await this._context.SaveChangesAsync();
 
-            return Content("The status of the Column ID: " + column.id +
+            return Content("The status of the Column ID: " + column.Id +
             " has been changed to: " + column.Status);
         }
 
@@ -78,7 +78,7 @@ namespace FactIntervention.Controllers
             this._context.columns.Update(column);
             await this._context.SaveChangesAsync();
 
-            return Content("The status of the Column ID: " + column.id +
+            return Content("The status of the Column ID: " + column.Id +
             " has been changed to: " + column.Status);
         }
 
@@ -97,7 +97,7 @@ namespace FactIntervention.Controllers
             this._context.columns.Update(column);
             await this._context.SaveChangesAsync();
 
-            return Content("The status of the Column ID: " + column.id +
+            return Content("The status of the Column ID: " + column.Id +
             " has been changed to: " + column.Status);
         }
         // POST: api/Columns
@@ -130,7 +130,7 @@ namespace FactIntervention.Controllers
 
         private bool ColumnExists(long id)
         {
-            return _context.columns.Any(e => e.id == id);
+            return _context.columns.Any(e => e.Id == id);
         }
     }
 }

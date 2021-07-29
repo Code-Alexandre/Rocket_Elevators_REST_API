@@ -9,7 +9,7 @@ namespace FactInterventionApi.Models
     public class Elevator
     {
         [Key]
-        public int id { get; set; }
+        public long Id { get; set; }
         public string Status { get; set; }
         // public long column_Id { get; set; }
         public  Column Column { get; }

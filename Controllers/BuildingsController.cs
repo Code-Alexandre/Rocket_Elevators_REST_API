@@ -111,7 +111,7 @@ namespace FactIntervention.Controllers
 
         private bool BuildingExists(long id)
         {
-            return _context.buildings.Any(e => e.id == id);
+            return _context.buildings.Any(e => e.Id == id);
         }
     }
 }

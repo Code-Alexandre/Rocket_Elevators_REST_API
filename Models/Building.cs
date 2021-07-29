@@ -10,8 +10,8 @@ namespace FactInterventionApi.Models
     public class Building
     {
         [Key]
-        public int id { get; set; }
-        public int customer_Id {get; set;}
+        public long Id { get; set; }
+        public long customer_Id {get; set;}
         public virtual ICollection<Battery> Batteries { get; set;}
         public  Customer Customer { get; set; }
 

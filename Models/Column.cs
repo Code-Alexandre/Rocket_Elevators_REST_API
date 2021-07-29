@@ -10,7 +10,7 @@ namespace FactInterventionApi.Models
     public class Column
     {
         [Key]
-        public int id { get; set; }
+        public long Id { get; set; }
         public string Status { get; set; }
         // public long battery_Id { get; set; }
         public virtual int battery_id { get; set; }

@@ -15,16 +15,16 @@ namespace FactInterventionApi.Models
     /////////This is where relations between tables in DB are specified
                
                 modelBuilder.Entity<Building>()
-                .HasKey(b => b.id);
+                .HasKey(b => b.Id);
 
                 modelBuilder.Entity<Battery>()
-                .HasKey(x => x.id);
+                .HasKey(x => x.Id);
 
                 modelBuilder.Entity<Column>()
-                .HasKey(x => x.id);
+                .HasKey(x => x.Id);
 
                 modelBuilder.Entity<Elevator>()
-                .HasKey(x => x.id);
+                .HasKey(x => x.Id);
 
                 modelBuilder.Entity<Lead>()
                 .HasKey(x => x.id);
@@ -33,7 +33,7 @@ namespace FactInterventionApi.Models
                 .HasKey(x => x.id);
 
                 modelBuilder.Entity<Customer>()  // New - for customers
-                .HasKey(x => x.id);
+                .HasKey(x => x.Id);
 
                 // modelBuilder.Entity<Address>()  // New - for addresses
                 // .HasKey(x => x.id);

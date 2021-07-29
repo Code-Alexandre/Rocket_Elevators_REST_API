@@ -7,6 +7,6 @@ using System.Web;
 public class Employee
 {
     [Key]
-    public int id { get; set; }
+    public long Id { get; set; }
 
 }
