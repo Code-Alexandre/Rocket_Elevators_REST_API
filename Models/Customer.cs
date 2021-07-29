@@ -19,7 +19,7 @@ namespace FactInterventionApi.Models
         public string technical_authority_phone_for_service { get; set; }
         public string company_description { get; set; }
         public long user_id { get; set; }
-        public long compagny_headquarters_address_id { get; set; }
+        public long company_headquarters_address_id { get; set; }
         public virtual ICollection<Building> Buildings { get; set; }
         
     }

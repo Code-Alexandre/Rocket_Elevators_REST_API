@@ -14,7 +14,7 @@ namespace FactInterventionApi.Models
         public string Status { get; set; }
         // public long Building_Id { get; set; }
 
-        public virtual int building_id { get; set;}
+        public virtual long building_id { get; set;}
         public  Building Building { get; set;}
 
         public virtual ICollection<Column> Columns { get; set;}

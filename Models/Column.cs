@@ -13,7 +13,7 @@ namespace FactInterventionApi.Models
         public long Id { get; set; }
         public string Status { get; set; }
         // public long battery_Id { get; set; }
-        public virtual int battery_id { get; set; }
+        public virtual long battery_id { get; set; }
         public  Battery Battery { get; set;}
         public virtual ICollection<Elevator> Elevators { get; }
     }

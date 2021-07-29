@@ -13,6 +13,6 @@ namespace FactInterventionApi.Models
         public string Status { get; set; }
         // public long column_Id { get; set; }
         public  Column Column { get; }
-        public virtual int column_id { get; set; }
+        public virtual long column_id { get; set; }
     }
 }    
