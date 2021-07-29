@@ -118,12 +118,18 @@ namespace FactIntervention.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Intervention>> PostIntervention(Intervention intervention)
+        public async Task<ActionResult<Intervention>> PostIntervention(Intervention newIntervention)
         {
-            _context.interventions.Add(intervention);
+            newIntervention.start_date = DateTime.Now;
+            newIntervention.end_date = DateTime.Now;
+            newIntervention.status = "InProgress";
+            newIntervention.result = "Incomplete";
+            newIntervention.employee_id = null;
+
+            _context.interventions.Add(newIntervention);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetIntervention", new { id = intervention.id }, intervention);
+            return newIntervention;
         }
         
 
