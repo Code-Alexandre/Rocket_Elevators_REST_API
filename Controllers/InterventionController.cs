@@ -120,8 +120,8 @@ namespace FactIntervention.Controllers
         [HttpPost]
         public async Task<ActionResult<Intervention>> PostIntervention(Intervention newIntervention)
         {
-            newIntervention.start_date = DateTime.Now;
-            newIntervention.end_date = DateTime.Now;
+            newIntervention.start_date = null;
+            newIntervention.end_date = null;
             newIntervention.status = "InProgress";
             newIntervention.result = "Incomplete";
             newIntervention.employee_id = null;
