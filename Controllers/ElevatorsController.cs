@@ -53,6 +53,24 @@ namespace FactIntervention.Controllers
 
             return customer;
         }
+        [HttpGet("{email}/elevator")]
+        public IEnumerable<Elevator> ElevatorCostumer([FromRoute] string email)
+        {
+            var customer_ = _context.customers.Where(c => c.email_of_the_company_contact.Equals(email));
+            Customer customer = customer_.FirstOrDefault();
+
+            IEnumerable<Elevator> Ele =
+            (from elevator in _context.elevators
+             join columns in _context.columns on elevator.column_id equals columns.Id
+             join batteries in _context.batteries on columns.battery_id equals batteries.Id
+             join building in _context.buildings on batteries.Id equals building.Id
+             where building.customer_Id == customer.Id
+             orderby elevator.Id
+             select elevator).Take(10);
+
+            return Ele.Distinct().ToList();
+
+        }
 
         // PUT: api/Elevators/5/status
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

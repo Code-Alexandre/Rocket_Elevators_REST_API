@@ -19,6 +19,7 @@ namespace FactInterventionApi.Models
         public string certificate_of_operations { get; set; }
         public string information { get; set; }
         public string notes { get; set; }
+        public string created_at {get; set;}
         [System.Text.Json.Serialization.JsonIgnore]
         public  Building Building { get; set;}
         public virtual ICollection<Column> Columns { get; set;}

@@ -47,7 +47,133 @@ namespace FactIntervention.Controllers
 
             return customer;
         }
+        [HttpGet("{email}/building")]
+        public IEnumerable<Building> BuildingsCostumer([FromRoute] string email)
+        {
+            var customer_ = _context.customers.Where(c => c.email_of_the_company_contact.Equals(email));
+            Customer customer = customer_.FirstOrDefault();      
 
+            IEnumerable<Building> Buil =
+              (from building in _context.buildings join customers in _context.customers on building.customer_Id equals customer.Id
+               select building).Take(10);
+            return Buil.Distinct().ToList();
+
+        }
+        //GET: api/Building/Intervention
+        [HttpGet ("Intervention")]
+        public ActionResult<IEnumerable<Building>> GetIntervention()
+        {
+            var AllBatteries = _context.batteries.ToList();
+            var AllBuildings = _context.buildings.ToList();
+            var AllColumns = _context.columns.ToList();
+            var AllElevators = _context.elevators.ToList();
+            List<Column> interventionColumn = new List<Column>();
+            List<Elevator> interventionElevator = new List<Elevator>();
+            List<Battery> interventionBattery = new List<Battery>();
+            List<Building> buildingsIntervention = new List<Building>();
+
+            
+            foreach (Elevator elevator in AllElevators) // Check if any elevator status = intervention
+            {
+                if (elevator.Status == "Intervention")
+                {
+                    Int64 counter = 0;
+                    foreach (Elevator E in interventionElevator)
+                    {
+                        if (E.Id == elevator.column_id)
+                        {
+                            counter++;
+                        }
+                    }
+                    if (counter == 0)
+                    {
+                        interventionElevator.Add(elevator);
+                        Console.WriteLine(interventionElevator);
+                    }
+                }
+            }
+
+            foreach (Elevator ele in interventionElevator) // Add the elevator's column in intervention column
+            {
+                foreach (Column col in AllColumns)
+                {
+                    if (col.Id == ele.column_id)
+                    {
+                        interventionColumn.Add(col);
+                        Console.WriteLine(interventionColumn);
+                    }
+                }
+            }
+
+            foreach (Column column in AllColumns) // Check if any column status = intervention
+            {
+                if (column.Status == "Intervention")
+                {
+                    Int64 counter = 0;
+                    foreach (Column C in interventionColumn)
+                    {
+                        if (C.Id == column.battery_id)
+                        {
+                            counter++;
+                        }
+                    }
+                    if (counter == 0)
+                    {
+                        interventionColumn.Add(column);
+                        Console.WriteLine(interventionColumn);
+                    }
+                }
+            }
+
+            foreach (Column columns in interventionColumn) // Add the column's battery in intervention battery
+            {
+                foreach (Battery bat in AllBatteries)
+                {
+                    if (bat.Id == columns.battery_id)
+                    {
+                        interventionBattery.Add(bat);
+                        Console.WriteLine(interventionBattery);
+                    }
+                }
+            }
+
+            foreach (Battery battery in AllBatteries) // Check if any battery status = intervention
+            {
+                if (battery.status == "Intervention")
+                {
+                    Int64 counter = 0;
+                    foreach (Battery BA in interventionBattery)
+                    {
+                        if (BA.Id == battery.building_id)
+                        {
+                            counter++;
+                        }
+                    }
+                    if (counter == 0)
+                    {
+                        interventionBattery.Add(battery);
+                        Console.WriteLine(interventionBattery);
+                    }
+                }
+            }
+
+            foreach (Battery batteries in interventionBattery) // Add the Battery's Building in intervention battery
+            {
+                foreach (Building building in AllBuildings)
+                {
+                    if (building.Id == batteries.building_id)
+                    // Console.WriteLine(building.Id);
+                    // Console.WriteLine(batteries.BuildingId);
+                    {
+                        buildingsIntervention.Add(building);
+                        Console.WriteLine(buildingsIntervention);
+                    }
+                }
+            }
+            buildingsIntervention = buildingsIntervention.OrderBy(o=>o.Id).ToList();
+            List<Building> buildingsInterventionNoDup = buildingsIntervention.Distinct().ToList();
+            return buildingsInterventionNoDup;
+        }
         // GET: api/Buildings/5
         // [HttpGet("{id}")]
         // public async Task<ActionResult<Building>> GetBuilding(long id)

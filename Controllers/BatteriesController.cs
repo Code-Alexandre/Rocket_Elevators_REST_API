@@ -40,6 +40,16 @@ namespace FactIntervention.Controllers
 
             return customer;
         }
+        [HttpGet("{email}/battery")]
+        public IEnumerable<Battery> BatteryCostumer([FromRoute] string email)
+        {
+            var customer_ = _context.customers.Where(c => c.email_of_the_company_contact.Equals(email));
+            Customer customer = customer_.FirstOrDefault();          
+            IEnumerable<Battery> Bat =
+            (from battery in _context.batteries join building in _context.buildings on battery.building_id equals building.Id
+             where building.customer_Id == customer.Id orderby building.created_at select battery).Take(5);
+            return Bat.Distinct().ToList();
+        }
         // [HttpGet("{id}")]
         // public async Task<ActionResult<Battery>> GetBattery(long id)
         // {

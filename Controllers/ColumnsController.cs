@@ -38,6 +38,20 @@ namespace FactIntervention.Controllers
 
             return customer;
         }
+        [HttpGet("{email}/column")]
+        public IEnumerable<Column> ColumnCostumer([FromRoute] string email)
+        {
+            var customer_ = _context.customers.Where(c => c.email_of_the_company_contact.Equals(email));
+            Customer customer = customer_.FirstOrDefault();      
+
+            IEnumerable<Column> Col =
+            (from column in _context.columns join batteries in _context.batteries on column.battery_id equals batteries.Id 
+            join building in _context.buildings on batteries.Id equals building.Id
+             where building.customer_Id == customer.Id  orderby batteries.created_at select column).Take(5);
+
+            return Col.Distinct().ToList();
+
+        }
         
 
         // GET: api/Columns/(id)

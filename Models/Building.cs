@@ -19,7 +19,7 @@ namespace FactInterventionApi.Models
         public string technical_contact_email_for_the_building {get; set;}
         public string technical_contact_phone_for_the_building {get; set;}
         public long? address_of_the_building_id {get; set;}
-
+        public string created_at {get; set;}
         public virtual ICollection<Battery> Batteries { get; set;}
         [System.Text.Json.Serialization.JsonIgnore]
         public  Customer Customer { get; set; }

@@ -52,6 +52,21 @@ namespace FactIntervention.Controllers
 
             return customer;
         }
+        [HttpGet("Email/{email}")]
+        public async Task<ActionResult<Customer>> GetCustomerEmail(string email)
+        {
+
+            IEnumerable<Customer> customersAll = await _context.customers.ToListAsync();
+
+            foreach (Customer customer in customersAll)
+            {
+                if (customer.email_of_the_company_contact == email)
+                {
+                    return customer;
+                }
+            }
+            return NotFound();
+        }
 
         // [HttpGet("{email}")]
         // public async Task<ActionResult<Customer>> GetCustomer(string email)
