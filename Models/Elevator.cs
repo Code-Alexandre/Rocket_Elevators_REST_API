@@ -20,6 +20,8 @@ namespace FactInterventionApi.Models
         public string information { get; set; }
         public string notes { get; set; }
         public long column_id { get; set; }
-
+        
+        [System.Text.Json.Serialization.JsonIgnore]
+        public  Column Column { get; }
     }
 }    

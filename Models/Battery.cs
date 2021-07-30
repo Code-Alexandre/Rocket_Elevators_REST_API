@@ -19,10 +19,8 @@ namespace FactInterventionApi.Models
         public string certificate_of_operations { get; set; }
         public string information { get; set; }
         public string notes { get; set; }
-
-        // public virtual long building_id { get; set;}
-        // public  Building Building { get; set;}
-
-        // public List<Column> columns { get; set; }
+        [System.Text.Json.Serialization.JsonIgnore]
+        public  Building Building { get; set;}
+        public virtual ICollection<Column> Columns { get; set;}
     }
 }        
